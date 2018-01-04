@@ -1,0 +1,33 @@
+
+class Solution {
+public:
+    
+    int smallest = INT_MAX;
+    int secondSmallest = INT_MAX;
+    
+    int findSecondMinimumValue(TreeNode* root) {
+        
+        if(root)
+        {
+      //      printf("\n value encountered = %d, smallest = %d , second_smallest = %d",root->val,smallest, secondSmallest);
+            if(root->val < smallest)
+            {
+                int temp = smallest;
+                smallest = root->val;
+                secondSmallest = temp;
+            }
+            else if(root->val < secondSmallest && root->val > smallest)
+            {
+                secondSmallest = root->val;
+            }
+            findSecondMinimumValue(root->left);
+            findSecondMinimumValue(root->right);
+        }
+        
+        if(secondSmallest == INT_MAX)
+            return -1;
+        else 
+            return secondSmallest;
+        
+    }
+};
