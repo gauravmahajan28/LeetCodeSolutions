@@ -1,0 +1,75 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    
+    int getMax(int a1, int a2)
+    {
+        if(a1 >= a2)
+            return a1;
+        return a2;
+    }
+    
+    int widthOfBinaryTree(TreeNode* root) {
+        
+        queue<TreeNode*> q;
+        map<TreeNode*, int> index;
+        
+        if(root == NULL)
+            return 0;
+        
+        q.push(root);
+        index[root] = 1;
+        
+        int max = 0;
+        
+        
+        
+        while(!q.empty())
+        {
+            int s = q.size(); // size for level
+            
+         //   printf("\n size at this level = %d",s);
+            
+            TreeNode *temp = q.front();
+            int leftMost = index[temp];
+            
+            
+            for(int i = 1; i <= s; i++)
+            {
+                TreeNode *n = q.front();
+                q.pop();
+                int rightIndex = index[n];
+                
+                max = getMax(max, rightIndex - leftMost + 1);
+         //       printf("\n node value = %d",n->val);
+                if(n->left != NULL)
+                {
+             //       printf("\n pushing left");
+                    TreeNode *left = n->left;
+                    q.push(left);
+                    index[left] = rightIndex * 2;
+                }
+                if(n->right != NULL)
+                {
+           //          printf("\n pushing right");
+                    TreeNode *right = n->right;
+                    q.push(right);
+                    index[right] = rightIndex * 2+1;
+                }
+            }
+            
+        }
+        
+        return max;
+        
+        
+    }
+};
