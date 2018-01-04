@@ -1,0 +1,56 @@
+class Solution {
+public:
+    int calPoints(vector<string>& ops) {
+        
+        string cancel("C");
+        string d("D");
+        string plus("+");
+        long long int sum = 0;
+        stack<int> answers;
+        
+        for(int i = 0; i < ops.size(); i++)
+        {
+            if(ops[i].compare(cancel) == 0)
+            {
+                int t = answers.top();
+                sum -= t;
+                answers.pop();
+            }
+            else if(ops[i].compare(d) == 0)
+            {
+                 int t = answers.top();
+                answers.push(t * 2);
+                sum += (t * 2);
+            }
+            else if(ops[i].compare(plus) == 0)
+            {
+                int t1 = answers.top();
+                answers.pop();
+                int t2 = answers.top();
+                answers.pop();
+                
+            //    printf("\n plus top1 = %d , top2 = %d",t1, t2);
+                
+                sum += t1;
+                sum += t2;
+                
+                answers.push(t2);
+                answers.push(t1);
+                answers.push(t1 + t2);
+                
+               
+                
+            }
+            else
+            {
+                int val = stoi(ops[i]);
+                answers.push(val);
+                sum += val;
+            }
+      //      printf("\n sum becomes = %lld",sum);
+        }
+        
+        return sum;
+        
+    }
+};
