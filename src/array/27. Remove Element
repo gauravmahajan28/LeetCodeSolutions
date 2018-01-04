@@ -1,0 +1,38 @@
+public class Solution {
+    public int removeElement(int[] nums, int val) {
+        				  
+		  int count = 0;
+		  
+		
+		  List<Integer> arrayList =   new ArrayList<>();
+		  
+		  for(int i = 0; i < nums.length; i++)
+		  {
+			  arrayList.add(nums[i]);
+		  }
+
+
+		  
+		  
+		  for(int i = 0; i < nums.length; i++)
+		  {
+			  if(nums[i] != val)
+				  count++;
+			  else
+				  arrayList.remove(arrayList.indexOf(val));
+		  }
+		  
+		  
+		  for( int counter = 0; counter < arrayList.size(); counter++)
+		  {
+			  nums[counter] = arrayList.get(counter);
+		  }
+		  
+		  
+		  return count;
+	        
+	        
+	    }
+
+    
+}
