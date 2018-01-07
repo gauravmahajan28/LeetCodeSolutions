@@ -1,0 +1,28 @@
+class Solution {
+public:
+  
+    int climbStairs(int n) {
+        
+        if(n == 1)
+            return 1;
+        
+        if(n == 2)
+            return 2;
+        
+         unsigned long long int ans, first, second, temp;
+        ans = 0;
+        first = 1;
+        second = 2;
+        
+         for(int i = 3; i <= n; i++)
+         {
+             ans = first + second;
+             temp = ans;
+             first = second;
+             second = ans;
+         } 
+        
+        return ans;
+        
+    }
+};
