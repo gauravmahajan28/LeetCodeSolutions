@@ -1,0 +1,93 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        
+        ListNode *head, *mainHead;
+        int cnt = 0;
+        if(l1 == NULL && l2 == NULL)
+            return NULL;
+        
+        while(l1!= NULL && l2!= NULL)
+        {
+          //  printf("I was here \n");
+            if(cnt == 0)
+            {
+                if(l1->val <= l2->val)
+                {
+                    head = l1;
+                    mainHead = l1;
+                    l1 = l1->next;
+                }    
+                else
+                {    
+                    head = l2;
+                    mainHead = l2;
+                    l2 = l2->next;
+                }    
+                cnt++;
+            }
+            else
+            {
+                 if(l1->val <= l2->val)
+                {
+                    head->next = l1;
+                     l1 = l1->next;
+                     head = head->next;
+                }    
+                else
+                {    
+                    head->next = l2;
+                    l2 = l2->next;
+                    head = head->next;
+                    
+                }    
+                cnt++;
+                
+            }
+        }
+        
+        if(cnt == 0)
+        {
+            if(l1 != NULL)
+            {
+                head = l1;
+                mainHead = l1;
+                l1 = l1->next;
+                
+            }
+            else
+            {
+            //    printf("\n assigned to l2");
+                head = l2;
+                 mainHead = l2;
+                l2 = l2->next;
+               
+            }
+        }
+        
+        while(l1)
+        {
+            head->next = l1;
+            head = head->next;
+            l1 = l1->next;
+        }
+        
+         while(l2)
+        {
+            head->next = l2;
+            head = head->next;
+            l2 = l2->next;
+        }
+        
+        head->next = NULL;
+        return mainHead;
+    }
+};
