@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int dominantIndex(vector<int>& nums) 
+    {
+        int largest = INT_MIN;
+        int secondLargest = INT_MIN;
+        
+        int largestIndex = -1;
+        int secondLargestIndex = -1;
+        
+        if(nums.size() == 1)
+            return 0;
+        
+        for(int i = 0; i < nums.size(); i++)
+        {
+            if(nums[i] > largest)
+            {
+               
+                secondLargest = largest;
+                secondLargestIndex = largestIndex;
+                largest = nums[i];
+                largestIndex = i;
+                
+            }
+            else if(nums[i] > secondLargest)
+            {
+                secondLargest = nums[i];
+                secondLargestIndex = i;
+            }
+          //   printf("\n larest = %d, second largest = %d",largest, secondLargest);
+        }
+        
+        if(secondLargest == INT_MIN)
+            return largestIndex;
+        
+        if(largest >= 2 * secondLargest)
+            return largestIndex;
+        
+        return -1;
+        
+    }
+};
