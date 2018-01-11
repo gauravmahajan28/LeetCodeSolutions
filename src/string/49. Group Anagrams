@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        
+        map<string,int> pos;
+        
+        int init = 0;
+        
+        vector<string> arr;
+       // cout<<
+        vector<vector<string>> result(strs.size());
+        //result[0].push_back("a");
+        for(int i=0;i<strs.size();i++)
+        {
+            
+             arr.push_back(strs[i]);
+           // cout<<arr[i];
+            sort(arr[i].begin(),arr[i].end());
+            
+            if(pos.find(arr[i]) == pos.end())
+            {
+                pos[arr[i]] = init;
+               result[init].push_back(strs[i]);
+                init++;
+            }
+            else
+            {
+                int loc = pos[arr[i]];
+                result[loc].push_back(strs[i]);
+            }
+        }
+        result.resize(init);
+     
+        return result;
+        
+    }
+};
